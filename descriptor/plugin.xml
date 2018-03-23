@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin
+ id="aton.plugin"
+ name="Aton Plugin"
+ version="1.0"
+ provider-name="Modultek"
+ class="com.modultek.pis.md.AtonPlugin">
+ <requires>
+ <api version="1.0"/>
+ </requires>
+ <runtime>
+ <library name="atonplugin.jar"/>
+ </runtime>
+</plugin>

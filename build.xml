@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<project name="MagicDraw Aton plugin" default="build" basedir="." >
+
+	<property file="build.properties" />
+	
+	<property name="build" location="build"/>
+	<property name="MagicDraw" location="C:/tools/MagicDraw"/>
+	<property name="MagicDraw-lib" location="${MagicDraw}/lib"/>
+	<property name="MagicDraw-plugin" location="${MagicDraw}/plugins"/>
+
+	<property name="java_src" location="src" />
+	<property name="java_build_target" location="build/classes" />
+	<property name="descriptor" location="descriptor"/>
+	<property name="AtonPluginJar" value="atonplugin.jar"/>
+	<property name="AtonPluginFolder" value="com.modultek.pis.aton"/>
+	<property name="AtonPluginFolder" value="com.modultek.pis.aton"/>
+	
+
+	<path id="classpath">
+		<fileset dir="${MagicDraw-lib}">
+			<include name="**/*.jar" />
+		</fileset>		
+	
+	</path>
+
+
+	<target name="clean">
+		<delete>
+			<fileset dir="${build}">
+				<include name="*.*" />
+			</fileset>
+		</delete>
+	</target>
+
+
+
+	<!-- ================================= 
+          target: build              
+         ================================= -->
+
+	<target name="build" description="compile">
+		
+		<delete includeemptydirs="true">
+			<fileset dir="${java_build_target}" includes="**/*"/>
+		</delete>
+
+		<javac srcdir="${java_src}" destdir="${java_build_target}">
+			<classpath refid="classpath" />
+		</javac>
+		<mkdir dir="${build}/${AtonPluginFolder}"/>
+		<jar destfile="${build}/${AtonPluginFolder}/${AtonPluginJar}" basedir="${java_build_target}"/>
+		<copy file="${descriptor}/plugin.xml" todir="${build}/${AtonPluginFolder}/"/>
+		<mkdir dir="${MagicDraw-plugin}/${AtonPluginFolder}"/>
+		<copy todir="${MagicDraw-plugin}/${AtonPluginFolder}">
+			<fileset dir="${build}/${AtonPluginFolder}"/>	
+        </copy>
+		
+	</target>
+
+	
+
+</project>
